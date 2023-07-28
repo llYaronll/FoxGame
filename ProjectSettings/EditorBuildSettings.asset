@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 8c9793aca0c329048aee9c29b34d84a1
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: 98cb2197070dc4e41bef582fc2a164e0
+  - enabled: 1
+    path: Assets/Scenes/Area1.unity
+    guid: 6a2b926de5974cf44932badfcbc7adf9
+  - enabled: 1
+    path: Assets/Scenes/Level1Scene.unity
+    guid: 54c022441ead3db45a0fa60421a00eae
+  - enabled: 1
+    path: Assets/Scenes/LevelFight.unity
+    guid: 8ebaaef2bce0cf54aa61587ba5effc24
   m_configObjects: {}
