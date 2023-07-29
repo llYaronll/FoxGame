@@ -2,20 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SoraHareSakura_Game_Api;
+using SoraHareSakura_GameData_Api;
+using UnityEngine.Experimental.GlobalIllumination;
 
-public class Data_Base_System : MonoBehaviour
+namespace SoraHareSakura_DataBaseSystem
 {
-    public string findObj;
-    // Start is called before the first frame update
-    void Start()
+    public class Data_Base_System : MonoBehaviour
     {
-        
-    }
+        public string findObj;
+        public GameData_Reserve dataReserve;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            if(dataReserve == null)
+            {
+                dataReserve = new GameData_Reserve();
+            }
+        }
 
     
-    // Update is called once per frame
-    void Update()
-    {
-        GameObject.Find(findObj).GetComponent<Text>().text="å‚³è¼¸";
+        // Update is called once per frame
+        void Update()
+        {
+            //GameObject.Find(findObj).GetComponent<Text>().text = "¶Ç¿é";
+        }
     }
+
 }
