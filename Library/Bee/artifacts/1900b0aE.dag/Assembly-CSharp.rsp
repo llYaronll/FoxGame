@@ -362,7 +362,11 @@
 "Assets/Script/Data_Base_System.cs"
 "Assets/Script/ImageShow.cs"
 "Assets/Script/Item_Show.cs"
+<<<<<<< Updated upstream
 "Assets/Script/LobbyRole.cs"
+=======
+"Assets/Script/RPG_API/Fight_System.cs"
+>>>>>>> Stashed changes
 "Assets/Script/RPG_API/GameData_Api.cs"
 "Assets/Script/RPG_API/Game_Api.cs"
 "Assets/Script/RPG_API/Game_Character.cs"

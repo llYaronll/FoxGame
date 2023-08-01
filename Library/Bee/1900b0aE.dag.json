@@ -21950,8 +21950,13 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp",
       "DisplayName": "Writing Assembly-CSharp.rsp",
       "ActionType": "WriteFile",
+<<<<<<< Updated upstream
       "PayloadOffset": 1642371,
       "PayloadLength": 33590,
+=======
+      "PayloadOffset": 1486789,
+      "PayloadLength": 29101,
+>>>>>>> Stashed changes
       "PayloadDebugContentSnippet": "-target:library\r\n-out:\"Library",
       "Inputs": [],
       "Outputs": [
@@ -21963,7 +21968,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2",
       "DisplayName": "Writing Assembly-CSharp.rsp2",
       "ActionType": "WriteFile",
+<<<<<<< Updated upstream
       "PayloadOffset": 1676048,
+=======
+      "PayloadOffset": 1515977,
+>>>>>>> Stashed changes
       "PayloadLength": 0,
       "PayloadDebugContentSnippet": "",
       "Inputs": [],
@@ -22217,7 +22226,11 @@
         "Assets/Script/Data_Base_System.cs",
         "Assets/Script/ImageShow.cs",
         "Assets/Script/Item_Show.cs",
+<<<<<<< Updated upstream
         "Assets/Script/LobbyRole.cs",
+=======
+        "Assets/Script/RPG_API/Fight_System.cs",
+>>>>>>> Stashed changes
         "Assets/Script/RPG_API/GameData_Api.cs",
         "Assets/Script/RPG_API/Game_Api.cs",
         "Assets/Script/RPG_API/Game_Character.cs",
@@ -22484,8 +22497,13 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp",
       "DisplayName": "Writing Assembly-CSharp.dll.mvfrm.rsp",
       "ActionType": "WriteFile",
+<<<<<<< Updated upstream
       "PayloadOffset": 1676144,
       "PayloadLength": 9969,
+=======
+      "PayloadOffset": 1516073,
+      "PayloadLength": 9729,
+>>>>>>> Stashed changes
       "PayloadDebugContentSnippet": "Library\\Bee\\artifacts\\mvdfrm\\U",
       "Inputs": [],
       "Outputs": [

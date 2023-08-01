@@ -21,6 +21,30 @@ namespace SoraHareSakura_GameApi
         public float criticalHitRate;
         public int hitRate;
         public int luck;
+
+        public Game_Character()
+        {
+
+            init("player1",0,new Level(),100,10,10,100,10,0,(float)0.1,(float)0.1,1,1);
+        }
+
+        public void init(string name, int id, Level lV, int stamina, int power, int speed, int mP, int spiritualPower, int defense, float criticalHitHarm, float criticalHitRate, int hitRate, int luck)
+        {
+            this.name = name;
+            this.id = id;
+            LV = lV;
+            this.stamina = stamina;
+            this.power = power;
+            this.speed = speed;
+            MP = mP;
+            this.spiritualPower = spiritualPower;
+            this.defense = defense;
+            this.criticalHitHarm = criticalHitHarm;
+            this.criticalHitRate = criticalHitRate;
+            this.hitRate = hitRate;
+            this.luck = luck;
+        }
+
     }
 
     [System.Serializable]
@@ -86,6 +110,12 @@ namespace SoraHareSakura_GameApi
             {
                 AddLevel();
             }
+        }
+
+        //ªì©l¤Æ¤É¯ÅÂI
+        public void initUpPoint()
+        {
+            upPoint = level * UpPointGrowthFunction() + initUpLevelPoint;
         }
 
     }
