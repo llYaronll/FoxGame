@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SoraHareSakura_Game_Api
 {
-    //General props ´¶³q¹D¨ã special prosps ¯S®í¹D¨ã
+    //General props æ™®é€šé“å…· special prosps ç‰¹æ®Šé“å…·
     [System.Serializable]
     public enum ItemType
     {
@@ -13,24 +13,24 @@ namespace SoraHareSakura_Game_Api
         specialProps
     }
 
-    //¹ï½Ö¨Ï¥Î
+    //å°èª°ä½¿ç”¨
     [System.Serializable]
     public enum ScopeOfUse
     {
-        none,//µL¹ï¶H
-        user,//¨Ï¥ÎªÌ
-        partner,//¶¤¤Í
-        enemy//¼Ä¤H
+        none,//ç„¡å°è±¡
+        user,//ä½¿ç”¨è€…
+        partner,//éšŠå‹
+        enemy//æ•µäºº
     }
 
-    //¨Ï¥Î³õ¦X
+    //ä½¿ç”¨å ´åˆ
     [System.Serializable]
     public enum Situation
     {
-        none,//µL³õ¦X
-        anyTime,//¥ô¦ó®É­Ô
-        menuTime,//¿ï³æ¤¶­±®É
-        fighting//¾Ô°«®É
+        none,//ç„¡å ´åˆ
+        anyTime,//ä»»ä½•æ™‚å€™
+        menuTime,//é¸å–®ä»‹é¢æ™‚
+        fighting//æˆ°é¬¥æ™‚
     }
 
     [System.Serializable]
