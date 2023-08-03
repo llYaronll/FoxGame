@@ -119,13 +119,13 @@ namespace SoraHareSakura_Fight_System
         {
             Game_Skill skill = skills.Find(skill => skill.name == skillName);
             string skillCommand = skill.consume.command;
-            float value;
-            bool skillUseOk = float.TryParse(skill.consume.args[0],out value);//(float)Convert.ToDouble(skill.consume.args[0]);
+            int value;
+            bool skillUseOk = int.TryParse(skill.consume.args[0],out value);//(float)Convert.ToDouble(skill.consume.args[0]);
             if (!skillUseOk)
             {
                 return false;
             }
-            skillUseOk = SkillConsume(skillCommand, value);
+            skillUseOk = SkillConsume(skillCommand,value);
             if (!skillUseOk)
             {
                 return false;
@@ -133,7 +133,7 @@ namespace SoraHareSakura_Fight_System
             return true;
         }
 
-        public bool SkillConsume(string a, float value)
+        public bool SkillConsume(string a, int value)
         {
             if (a.Equals("HP"))
             {
@@ -155,15 +155,15 @@ namespace SoraHareSakura_Fight_System
             int damageValue = (int)damage;
             if (damageType.Equals("HP+"))
             {
-                target.stamina.AddValue(-);
+                //target.stamina.AddValue(-);
             }
             if (damageType.Equals("MP+"))
             {
-                target.MP.AddValue(-);
+                //target.MP.AddValue(-);
             }
             if (damageType.Equals("AV+"))
             {
-                target.actionValue.Restore(-);
+                //target.actionValue.Restore(-);
             }
             return damageValue;
         }
@@ -320,7 +320,7 @@ namespace SoraHareSakura_Fight_System
 
         public void Attack(Game_Actor target,Game_Actor attacker)
         {
-            attacker.Attack(target);
+            //attacker.Attack(target);
         }
 
         public void UseSkillOfPlayer(Game_Actor a,string skillName)

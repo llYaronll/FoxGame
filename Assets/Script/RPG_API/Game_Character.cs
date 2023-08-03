@@ -167,7 +167,7 @@ namespace SoraHareSakura_GameApi
         public void AddUpPoint(int addUpPoint)
         {
             upPoint = upPoint + addUpPoint;
-            SetUpPoint(upPoint)
+            SetUpPoint(upPoint);
         }
 
         public void SetUpPoint(int setUpPoint)
