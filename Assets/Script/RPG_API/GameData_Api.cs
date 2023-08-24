@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using SoraHareSakura_Game_Api;
+using SoraHareSakura_GameApi;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace SoraHareSakura_GameData_Api
@@ -37,4 +40,40 @@ namespace SoraHareSakura_GameData_Api
         }
     }
 
+    [System.Serializable]
+    public class GameData_StateTable
+    {
+        public int id;
+        public List<Game_State> game_States;
+
+        public Game_State FindAndAddState(string stateName)
+        {
+            Game_State NoFight = new Game_State();
+            Game_State reg = game_States.Find(state => state.name.Equals(stateName));
+            if(reg == null)
+            {
+                return null;
+            }
+            NoFight.Copy(reg);
+            return NoFight;
+        }
+    }
+
+    [System.Serializable]
+    public class GameData_EquipmentTypeTable
+    {
+        public List<string> equipmentType;
+    }
+
+    [System.Serializable]
+    public class GameData_AttackType
+    {
+        public List<string> attackType;
+    }
+
+    [System.Serializable]
+    public class GameData_SkillTable
+    {
+        public List<Game_Skill> skillTable;
+    }
 }

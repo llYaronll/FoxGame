@@ -12,6 +12,8 @@ namespace SoraHareSakura_DataBaseSystem
     {
         public string findObj;
         public GameData_Reserve dataReserve;
+        public GameData_StateTable stateTable;
+        public GameData_SkillTable skillTable;
 
         // Start is called before the first frame update
         void Start()
