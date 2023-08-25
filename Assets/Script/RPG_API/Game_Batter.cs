@@ -73,6 +73,7 @@ namespace SoraHareSakura_Fight_System
         //¥Î¤å¦r±Ô­zÄÝ©Ê
         public void ShowText()
         {
+            if (text == null) return;
             text.text = "";
             text.text += gameActor.name + "\n";
             text.text += "HP" + gameActor.stamina.newValue + "/" + gameActor.stamina.maxValue + "\n";
