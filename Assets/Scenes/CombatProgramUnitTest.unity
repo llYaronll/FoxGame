@@ -554,9 +554,9 @@ MonoBehaviour:
       upPoint: 0
       upValue: 0
     power:
-      newValue: 100
-      maxValue: 100
-      initValue: 100
+      newValue: 0
+      maxValue: 0
+      initValue: 0
       effectAddValue: 0
       equipmentSumValue: 0
       upPoint: 0
@@ -1520,7 +1520,8 @@ MonoBehaviour:
   - {fileID: 155590108}
   - {fileID: 1499120027}
   order: 0
-  oldCount: 0
+  ti: 0
+  SurviveTable: 
 --- !u!1 &849459015
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2665,8 @@ MonoBehaviour:
   - {fileID: 2080807747}
   - {fileID: 1329524093}
   order: 0
-  oldCount: 0
+  ti: 0
+  SurviveTable: 
 --- !u!1 &1374003770
 GameObject:
   m_ObjectHideFlags: 0

@@ -486,7 +486,6 @@ namespace SoraHareSakura_Fight_System
         {
             PlayerAction();
             EnemysAction();
-
         }
 
         private void FixedUpdate()
@@ -498,31 +497,51 @@ namespace SoraHareSakura_Fight_System
         {
             for(int i = 0; i < enemyTeam.Count; i++)
             {
-                float actionValue = enemyTeam[i].gameActor.actionValue.actionValue;
-                if (enemyTeam[i].NextSkill == null || enemyTeam[i].NextSkill.Equals("")) {
-                    enemyTeam[i].AISelectSkill();
-                }
-                if (enemyTeam[i].gameActor.actionValue.ValueIsMax())
+                if (enemyTeam[i].IsSurvive())
                 {
-                    AttackState(enemyTeam[i], enemyTeam[i].NextSkill);
-                    enemyTeam[i].AISelectSkill();
-                }
-                else
-                {
-                    enemyTeam[i].gameActor.actionValue.Restore(Time.deltaTime);
+                    float actionValue = enemyTeam[i].gameActor.actionValue.actionValue;
+                    if (enemyTeam[i].NextSkill == null || enemyTeam[i].NextSkill.Equals("")) {
+                        enemyTeam[i].AISelectSkill();
+                    }
+                    if (enemyTeam[i].gameActor.actionValue.ValueIsMax())
+                    {
+                        AttackState(enemyTeam[i], enemyTeam[i].NextSkill);
+                        enemyTeam[i].AISelectSkill();
+                    }
+                    else
+                    {
+                        enemyTeam[i].gameActor.actionValue.Restore(Time.deltaTime);
+                    }
                 }
             }
         }
 
         public void PlayerAction()
         {
+            List<int> tse = new List<int>();
+            List<int> tsp = new List<int>();
+            bool enemyTeamTargetIsUse = (targetSelectorEnemy != null && targetSelectorEnemy.isActiveAndEnabled);
+            bool playerTeamTargetIsUse = (targetSelectorPartner != null && targetSelectorPartner.isActiveAndEnabled);
+
             //將玩家選擇的目標分享給玩家團隊
-            List<int> tse = targetSelectorEnemy.ToOrder();
-            List<int> tsp = targetSelectorPartner.ToOrder();
+            if (enemyTeamTargetIsUse)
+            {
+                tse = targetSelectorEnemy.ToOrder();
+                Debug.Log("is tse");
+            }
+            
+            if(playerTeamTargetIsUse)
+            {
+                tsp = targetSelectorPartner.ToOrder();
+                Debug.Log("is tsp");
+            }
+
             for(int i =0;i < playerTeam.Count; i++)
             {
-                playerTeam[i].enemyPriority.SetPriority(tse);
-                playerTeam[i].partnerPriority.SetPriority(tsp);
+                if(enemyTeamTargetIsUse)
+                    playerTeam[i].enemyPriority.SetPriority(tse);
+                if (playerTeamTargetIsUse)
+                    playerTeam[i].partnerPriority.SetPriority(tsp);
                 playerTeam[i].gameActor.actionValue.Restore(Time.deltaTime);
             }
         }
@@ -562,15 +581,11 @@ namespace SoraHareSakura_Fight_System
             }
             for(int i = 0;i < attacker.gameActor.states.Count; i++)
             {
-                if(attacker.gameActor.states[i] != null)
+                if(!attacker.IsSurvive())
                 {
-                    if (attacker.gameActor.states[i].limitType == LimitAction.unableToAct)
-                    {
-                        Debug.Log("No fight");
-                        return;
-                    }
+                    Debug.Log("No fight");
+                    return;
                 }
-                
             }
 
             bool k = attacker.gameActor.UseSkill(skillName);

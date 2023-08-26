@@ -16,7 +16,8 @@ namespace SoraHareSakura_Fight_System
         public List<GameObject> marks;//標示目標優先值的圖案
         public List<GameObject> team;//場上戰鬥的團隊物件
         public int order;//目前選擇第幾個順位
-        public int oldCount;//舊的目標選擇數量
+        public int ti;
+        public List<bool> SurviveTable;
 
 
         // Start is called before the first frame update
@@ -25,16 +26,24 @@ namespace SoraHareSakura_Fight_System
             marks = new List<GameObject>();
             InitMark();
             order = 0;
-            oldCount = team.Count;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if(team.Count != oldCount)
+            /*if(team.Count != oldCount)
             {
                 InitMark();
                 oldCount = team.Count;
+            }*/
+            for(int i = 0; i < team.Count; i++)
+            {
+                if (!team[i].GetComponent<Game_Batter>().IsSurvive() && SurviveTable[i])
+                {
+                    team[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                    Touch(team[i].GetComponent<RectTransform>());
+                    SurviveTable[i] = false;
+                }
             }
         }
 
@@ -46,6 +55,7 @@ namespace SoraHareSakura_Fight_System
                 Destroy(mark);
             }
             marks.Clear();
+            SurviveTable = new List<bool>();
             foreach (GameObject button in team)
             {
                 button.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -54,9 +64,11 @@ namespace SoraHareSakura_Fight_System
                 {
                     Touch(button.GetComponent<RectTransform>());
                 });
+                SurviveTable.Add(true);
             }
         }
 
+        //新增mark 到 team 位置
         public void NewMark(GameObject batter)
         {
             GameObject newMark = Instantiate(mark);
@@ -74,6 +86,8 @@ namespace SoraHareSakura_Fight_System
             marks.Add(newMark);
         }
         
+
+        //增加batter 到 team
         public void AddBatter(GameObject batter)
         {
             team.Add(batter);
@@ -146,12 +160,12 @@ namespace SoraHareSakura_Fight_System
                     thisMark.GetComponent<RectTransform>().anchoredPosition.y == teamObj.GetComponent<RectTransform>().anchoredPosition.y
                 );
                 string orderValue = teamOrderNumber.GetComponentInChildren<Text>().text;
-                int order;
-                bool isOk = int.TryParse(orderValue, out order);
+                int showOrder;
+                bool isOk = int.TryParse(orderValue, out showOrder);
 
                 if (isOk)
                 {
-                    list.Add(marks.Count - order);
+                    list.Add(marks.Count - showOrder);
                 }
                 else
                 {
@@ -164,6 +178,7 @@ namespace SoraHareSakura_Fight_System
                 showList += list[i].ToString() + ",";
             }
             showList += "}";
+            showList += order;
             Debug.Log(showList);
             return list;
         }

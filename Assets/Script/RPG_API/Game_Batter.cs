@@ -98,6 +98,18 @@ namespace SoraHareSakura_Fight_System
             }
         }
 
+        public bool IsSurvive()
+        {
+            foreach(Game_State state in gameActor.states)
+            {
+                if(state.limitType == LimitAction.unableToAct)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         //設定目標優先值
         public void SetTarget(int id,int number,bool isPartner)
         {
