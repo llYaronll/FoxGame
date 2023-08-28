@@ -1,24 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using SoraHareSakura_Game_Api;
 using SoraHareSakura_GameData_Api;
-using UnityEngine.Experimental.GlobalIllumination;
 using SoraHareSakura_GameApi;
-using UnityEngine.TextCore.Text;
 using System;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
-using System.ComponentModel;
-using System.Linq;
 using SoraHareSakura_DataBaseSystem;
-using static UnityEngine.GraphicsBuffer;
-using UnityEditor.Build;
 using Random = UnityEngine.Random;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 
 namespace SoraHareSakura_Fight_System
 {
@@ -457,7 +444,7 @@ namespace SoraHareSakura_Fight_System
                 playerArea.Add(new List<int>());
             }
 
-            for(int i = 0; i < enemyTeam.Count; i++)//i=id
+            for (int i = 0; i < enemyTeam.Count; i++)//i=id
             {
                 enemyArea[enemyTeam[i].queuePosition].Add(i);
                 enemyTeam[i].partnerPriority = new PriorityTable();
@@ -603,7 +590,30 @@ namespace SoraHareSakura_Fight_System
             List<int> targets = new List<int>();
             int skillD = attacker.gameActor.skills.Find(skill => skill.name == skillName).useSkillDistance;
             ScopeOfUse scopeOfUse = attacker.gameActor.skills.Find(skill => skill.name == skillName).scopeOfUse;
-            int skillEnd = skillD - attacker.queuePosition;//
+
+            List<int> ints = new List<int>();
+            for (int i = 0;i < enemyTeam.Count; i++)
+            {
+                if(enemyTeam[i].queuePosition > ints.Count - 1)
+                {
+                    int reg = 0;
+                    ints.Add(reg);
+                }
+                if(enemyTeam[i].IsSurvive())
+                {
+                    ints[enemyTeam[i].queuePosition]++;
+                }
+            }
+            int Q = 0;
+            for(int i = 0; i< ints.Count; i++)
+            {
+                if(ints[i] <= 0)
+                {
+                    Q++;
+                }
+            }
+
+            int skillEnd = skillD - attacker.queuePosition + Q;//
             skillEnd = Math.Clamp(skillEnd, 0, enemyArea.Count);
             int targetId = -1;
 

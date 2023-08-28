@@ -384,7 +384,7 @@ MonoBehaviour:
       equipmentSlots: []
     states: []
     skills: []
-  queuePosition: 0
+  queuePosition: 1
   counter: 0
   partnerPriority:
     priorityObjs: []
@@ -940,7 +940,7 @@ MonoBehaviour:
       type: 2
       scopeOfUse: 3
       whenToUse: 3
-      useSkillDistance: 10
+      useSkillDistance: 3
       consume:
         command: consumeMP
         args:
@@ -950,7 +950,7 @@ MonoBehaviour:
       isCritical: 0
       commands: []
       imagePath: 
-  queuePosition: 0
+  queuePosition: 2
   counter: 0
   partnerPriority:
     priorityObjs: []
@@ -3090,7 +3090,7 @@ MonoBehaviour:
       equipmentSlots: []
     states: []
     skills: []
-  queuePosition: 0
+  queuePosition: 2
   counter: 0
   partnerPriority:
     priorityObjs: []
