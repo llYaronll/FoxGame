@@ -35,8 +35,6 @@ namespace SoraHareSakura_Game_Api
         fighting//戰鬥時
     }
 
-
-
     [System.Serializable]
     public class Game_Item
     {
@@ -200,7 +198,7 @@ namespace SoraHareSakura_Game_Api
     }
 
 
-
+    //遊戲裝備
     [System.Serializable]
     public class Game_EquipmentSlot
     {
@@ -265,6 +263,34 @@ namespace SoraHareSakura_Game_Api
         {
             return 0;
         }
+
+        public int SumAttributeValueInt(string attributeName)
+        {
+            int sumValue = 0;
+            foreach(Game_EquipmentSlot eq in equipmentSlots)
+            {
+                GameCommand_AddAttributeValue reg = eq.equipment.addAttributeValues.Find(command => command.command.Equals(attributeName));
+                if(reg != null)
+                {
+                    sumValue += reg.GetValueInt();
+                }
+            }
+            return sumValue;
+        }
+
+        public float SumAttributeValueFloat(string attributeName)
+        {
+            float sumValue = 0;
+            foreach (Game_EquipmentSlot eq in equipmentSlots)
+            {
+                GameCommand_AddAttributeValue reg = eq.equipment.addAttributeValues.Find(command => command.command.Equals(attributeName));
+                if (reg != null)
+                {
+                    sumValue += reg.GetValueFloat();
+                }
+            }
+            return sumValue;
+        }
     }
 
     [System.Serializable]
@@ -307,14 +333,49 @@ namespace SoraHareSakura_Game_Api
 
     public class GameCommand_AddAttributeValue : Game_Command
     {
-        public int AddValueInt()
+        public int GetValueInt()
         {
             return (int)float.Parse(args[0]);
         }
 
-        public float AddValueFloat()
+        public float GetValueFloat()
         {
             return float.Parse(args[0]);
+        }
+
+        public void AddValueFloat(float value)
+        {
+            float reg = GetValueFloat();
+            reg += value;
+            args[0] = reg.ToString();
+        }
+
+        public void AddValueInt(int value)
+        {
+            int reg = GetValueInt();
+            reg += value;
+            args[0] = reg.ToString();
+        }
+
+        public void AddValue(string valueString)
+        {
+            float value = float.Parse(valueString);
+            AddValueFloat(value);
+        }
+
+        public void SetValueType(string type)
+        {
+            if (type.Equals("float"))
+            {
+                args[0] = GetValueFloat().ToString();
+                return;
+            }
+
+            if (type.Equals("int"))
+            {
+                args[0] = GetValueInt().ToString();
+                return;
+            }
         }
     }
 
@@ -375,6 +436,11 @@ namespace SoraHareSakura_Game_Api
             luck.Copy(a.luck);
             actionValue.Copy(a.actionValue);
             equipmentSlots = a.equipmentSlots;*/
+        }
+
+        public void Copy(string a)
+        {
+            JsonToThis(a);
         }
 
         public string ToJson()
@@ -481,7 +547,9 @@ namespace SoraHareSakura_Game_Api
 
     public class Attribute<numberType>
     {
-        public numberType newValue;//現在值
+        public string name;
+
+        public numberType nowValue;//現在值
         public numberType maxValue;//最大值 也用作固定值
         public numberType initValue;//初始值
         public numberType effectAddValue;//狀態效果增加最大值的值
@@ -494,13 +562,14 @@ namespace SoraHareSakura_Game_Api
 
         public void Copy(Attribute<numberType> A)
         {
-            newValue = A.newValue;
+            /*newValue = A.newValue;
             maxValue = A.maxValue;
             initValue = A.initValue;
             effectAddValue = A.effectAddValue;
             equipmentSumValue = A.equipmentSumValue;
             upPoint = A.upPoint;
-            upValue = A.upValue;
+            upValue = A.upValue;*/
+            JsonToThis(A.ToJson());
         }
 
         public string ToJson()
@@ -530,7 +599,7 @@ namespace SoraHareSakura_Game_Api
 
         public AttributeValue()
         {
-            newValue = 100;
+            nowValue = 100;
             maxValue = 100;
             initValue = 100;
             upPoint = 0;
@@ -547,7 +616,7 @@ namespace SoraHareSakura_Game_Api
 
         public void init(int newValue, int maxValue, int initValue, int upPoint, float upValue)
         {
-            this.newValue = newValue;
+            this.nowValue = newValue;
             this.maxValue = maxValue;
             this.initValue = initValue;
             this.upPoint = upPoint;
@@ -585,6 +654,12 @@ namespace SoraHareSakura_Game_Api
             UpMaxValueData();
         }
 
+        public void UpDataEquipment(int equipmentValue)
+        {
+            equipmentSumValue = equipmentValue;
+            UpMaxValueData();
+        }
+
         public void UpMaxValueData()
         {
             //int sumEquipmentValue = equipmentValue.Sum();
@@ -599,16 +674,16 @@ namespace SoraHareSakura_Game_Api
 
         public void AddValue(int addValue, bool yesOver)
         {
-            newValue = newValue + addValue;
-            if (newValue < 0) newValue = 0;
+            nowValue = nowValue + addValue;
+            if (nowValue < 0) nowValue = 0;
             if (yesOver) return;
-            if (newValue > maxValue) newValue = maxValue;
+            if (nowValue > maxValue) nowValue = maxValue;
         }
 
         public bool ConsumeValue(int consumeValue)
         {
-            if (newValue < consumeValue) return false;
-            newValue = newValue - consumeValue;
+            if (nowValue < consumeValue) return false;
+            nowValue = nowValue - consumeValue;
             return true;
         }
     }
@@ -619,7 +694,7 @@ namespace SoraHareSakura_Game_Api
 
         public AttributeValueFloat()
         {
-            newValue = 100;
+            nowValue = 100;
             maxValue = 100;
             initValue = 100;
             upPoint = 0;
@@ -635,7 +710,7 @@ namespace SoraHareSakura_Game_Api
 
         public void init(float newValue, float maxValue, float initValue, int upPoint, float upValue)
         {
-            this.newValue = newValue;
+            this.nowValue = newValue;
             this.maxValue = maxValue;
             this.initValue = initValue;
             this.upPoint = upPoint;
@@ -673,6 +748,12 @@ namespace SoraHareSakura_Game_Api
             UpMaxValueData();
         }
 
+        public void UpDataEquipment(float equipmentValue)
+        {
+            equipmentSumValue = equipmentValue;
+            UpMaxValueData();
+        }
+
         public void UpMaxValueData()
         {
             maxValue = initValue + effectAddValue + equipmentSumValue + upPoint * upValue;
@@ -685,16 +766,16 @@ namespace SoraHareSakura_Game_Api
 
         public void AddValue(float addValue, bool yesOver)
         {
-            newValue = newValue + addValue;
-            if (newValue < 0) newValue = 0;
+            nowValue = nowValue + addValue;
+            if (nowValue < 0) nowValue = 0;
             if (yesOver) return;
-            if (newValue > maxValue) newValue = maxValue;
+            if (nowValue > maxValue) nowValue = maxValue;
         }
 
         public bool ConsumeValue(float consumeValue)
         {
-            if (newValue < consumeValue) return false;
-            newValue = newValue - consumeValue;
+            if (nowValue < consumeValue) return false;
+            nowValue = nowValue - consumeValue;
             return true;
         }
     }
@@ -891,6 +972,12 @@ namespace SoraHareSakura_Game_Api
         public void UpDataEquipmentValue(List<float> equipmentValue)
         {
             equipmentSumValue = equipmentValue.Sum();
+            UpMaxValueData();
+        }
+
+        public void UpDataEquipmentValue(float equipmentValue)
+        {
+            equipmentSumValue = equipmentValue;
             UpMaxValueData();
         }
 

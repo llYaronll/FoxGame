@@ -15,6 +15,7 @@ namespace SoraHareSakura_Fight_System
         public Text text;
         public Game_Actor gameActor;
         public int queuePosition;//0前排 1中衛 2後衛 ...
+        
         public float counter;
 
         //優先選擇我方值
@@ -69,15 +70,15 @@ namespace SoraHareSakura_Fight_System
             }
 
         }
-        
+
         //用文字敘述屬性
         public void ShowText()
         {
             if (text == null) return;
             text.text = "";
             text.text += gameActor.name + "\n";
-            text.text += "HP" + gameActor.stamina.newValue + "/" + gameActor.stamina.maxValue + "\n";
-            text.text += "MP" + gameActor.magicPoint.newValue + "/" + gameActor.magicPoint.maxValue + "\n";
+            text.text += "HP" + gameActor.stamina.nowValue + "/" + gameActor.stamina.maxValue + "\n";
+            text.text += "MP" + gameActor.magicPoint.nowValue + "/" + gameActor.magicPoint.maxValue + "\n";
 
             int av = (int)gameActor.actionValue.actionValue;
             int mav = (int)gameActor.actionValue.maxActionValue;
@@ -91,7 +92,7 @@ namespace SoraHareSakura_Fight_System
 
         public void Survive()
         {
-            if(gameActor.stamina.newValue <= 0)
+            if(gameActor.stamina.nowValue <= 0)
             {
                 Game_State k = GameObject.Find("DataBase").GetComponent<Data_Base_System>().stateTable.FindAndAddState("戰鬥不能");
                 gameActor.AddState(k);

@@ -51,13 +51,158 @@ namespace SoraHareSakura_GameApi
                     return;
                 }
             });
+            if(putOn)UpDataFigherAttributeOfEquipment();
             return putOn;
         }
 
         public void UpDataFigherAttributeOfEquipment()
         {
+            //int
+            stamina.UpDataEquipment(equipmentSlots.SumAttributeValueInt("stamina"));
+            magicPoint.UpDataEquipment(equipmentSlots.SumAttributeValueInt("magicPoint"));
+            power.UpDataEquipment(equipmentSlots.SumAttributeValueInt("power"));
+            spiritualPower.UpDataEquipment(equipmentSlots.SumAttributeValueInt("spiritualPower"));
+            speed.UpDataEquipment(equipmentSlots.SumAttributeValueInt("speed"));
 
+            attack.UpDataEquipment(equipmentSlots.SumAttributeValueInt("attack"));
+            magicAttack.UpDataEquipment(equipmentSlots.SumAttributeValueInt("magicAttack"));
+            magicDefense.UpDataEquipment(equipmentSlots.SumAttributeValueInt("magicDefense"));
+            defense.UpDataEquipment(equipmentSlots.SumAttributeValueInt("defense"));
+
+            //float
+            criticalHitHarm.UpDataEquipment(equipmentSlots.SumAttributeValueFloat("criticalHitHarm"));
+            criticalHitRate.UpDataEquipment(equipmentSlots.SumAttributeValueFloat("criticalHitRate"));
+
+            //int
+            hitRate.UpDataEquipment(equipmentSlots.SumAttributeValueInt("hitRate"));
+            luck.UpDataEquipment(equipmentSlots.SumAttributeValueInt("luck"));
+
+            actionValue.UpDataEquipmentValue(equipmentSlots.SumAttributeValueFloat("actionValue"));
         }
+
+        //stamina
+        public void UpStamina(int value)
+        {
+            stamina.AddUpPoint(value);
+        }
+
+        public (int now,int max) Stamina()
+        {
+            return (stamina.nowValue, stamina.maxValue);
+        }
+
+        public string ShowStaminaString()
+        {
+            string showText = Stamina().now + "/" + Stamina().max;
+            return showText;
+        }
+
+        //magic point
+        public void UpMagicPoint(int value)
+        {
+            magicPoint.AddUpPoint(value);
+        }
+
+        public (int now,int max) MagicPoint()
+        {
+            return (magicPoint.nowValue, magicPoint.maxValue);
+        }
+
+        //power
+        public void UpPower(int value)
+        {
+            power.AddUpPoint(value);
+        }
+
+        public int Power()
+        {
+            return power.maxValue;
+        }
+
+        //speed
+        public void UpSpeed(int value)
+        {
+            speed.AddUpPoint(value);
+        }
+
+        public int Speed()
+        {
+            return speed.maxValue;
+        }
+
+        //spiritua power
+        public void UpSpiritualPower(int value)
+        {
+            spiritualPower.AddUpPoint(value); 
+        }
+
+        public int SpiritualPower()
+        {
+            return spiritualPower.maxValue;
+        }
+
+        //attack
+        public int AttackValue()
+        {
+            return attack.maxValue;
+        }
+
+        //defense
+        public int DefenseValue()
+        {
+            return defense.maxValue;
+        }
+
+        //magic attack
+        public int MagicAttack()
+        {
+            return magicAttack.maxValue;
+        }
+
+        //magic defense
+        public int MagicDefense()
+        {
+            return magicDefense.maxValue;
+        }
+
+        //critical hit harm
+        public float CriticalHitHarm()
+        {
+            return criticalHitHarm.maxValue;
+        }
+
+        //critical hit rate
+        public float CriticalHitRate()
+        {
+            return criticalHitRate.maxValue;
+        }
+
+        //hit rate
+        public int HitRate()
+        {
+            return hitRate.maxValue;
+        }
+
+        //luck
+        public int Luck()
+        {
+            return luck.maxValue;
+        }
+
+        //action value
+        public (float now,float max) ActionValue()
+        {
+            return (actionValue.actionValue, actionValue.maxActionValue);
+        }
+
+        //skill
+        public void AddSkill(Game_Skill enterSkill)
+        {
+            Game_Skill skill = new Game_Skill();
+            skill.JsonToThis(enterSkill.ToJson());
+            skills.Add(skill);
+        }
+
     }
 
 }

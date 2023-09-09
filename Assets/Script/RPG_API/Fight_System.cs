@@ -39,6 +39,7 @@ namespace SoraHareSakura_Fight_System
             this.equipmentSlots = new Game_EquipmentColumn();
             this.states = new List<Game_State>();
             this.skills = new List<Game_Skill>();
+
         }
           
         public Game_Actor(Character_Attribute character)
@@ -104,7 +105,8 @@ namespace SoraHareSakura_Fight_System
             {
                 state.Run(this);
             }
-        }    }
+        }
+    }
 
     [System.Serializable]
     public class Attack_ModeTable
