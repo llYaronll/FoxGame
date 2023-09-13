@@ -415,6 +415,35 @@ namespace SoraHareSakura_Game_Api
         public List<Game_State> states;
         public List<Game_Skill> skills;
 
+        public void init()
+        {
+            this.id = 0;
+            this.name = "";
+
+            this.level = new Level();
+
+            this.stamina = new AttributeValue();
+            this.magicPoint = new AttributeValue();
+            this.power = new AttributeValue();
+            this.spiritualPower = new AttributeValue();
+            this.speed = new AttributeValue();
+
+            this.attack = new AttributeValue();
+            this.magicAttack = new AttributeValue();
+            this.magicDefense = new AttributeValue();
+            this.defense = new AttributeValue();
+            this.criticalHitHarm = new AttributeValueFloat();
+            this.criticalHitRate = new AttributeValueFloat();
+            this.hitRate = new AttributeValue();
+            this.luck = new AttributeValue();
+
+            this.actionValue = new Action_Value();
+
+            this.equipmentSlots = new Game_EquipmentColumn();
+            this.states = new List<Game_State>();
+            this.skills = new List<Game_Skill>();
+        }
+
         public void Copy(Character_Attribute a)
         {
             JsonToThis(a.ToJson());
@@ -469,15 +498,38 @@ namespace SoraHareSakura_Game_Api
         public Level()
         {
         }
+
         public void Copy(Level copyObject)
         {
             JsonToThis(copyObject.ToJson());
+        }
+
+        public void Init(int upLevelExperiencePoint)
+        {
+            InitUpLevelExperience(upLevelExperiencePoint);
+        }
+
+        public void InitUpLevelPoint(int initUpLevelPoint)
+        {
+            this.initUpLevelPoint = initUpLevelPoint;
+            initUpPoint();
+        }
+
+        public void InitUpLevelExperience(int upLevelExperiencePoint)
+        {
+            this.upLevelExperiencePoint = upLevelExperiencePoint;
+            EXGrowth();
         }
 
         //經驗值成長函數
         public int EXGrowthFunction()
         {
             return growthValue * level + upLevelExperiencePoint;
+        }
+
+        public void EXGrowth()
+        {
+            upLevelExperiencePoint = EXGrowthFunction();
         }
 
         //升級點成長函數
@@ -625,6 +677,31 @@ namespace SoraHareSakura_Game_Api
             equipmentSumValue = 0;
         }
 
+        public void SetInit(int value)
+        {
+            nowValue = value;
+            maxValue = value;
+
+            initValue = value;
+
+            upPoint = 0;
+            upValue = 10;
+
+            effectAddValue = 0;
+            equipmentSumValue = 0;
+        }
+        public void SetInit(int value,int upvalue)
+        {
+            SetInit(value);
+            SetUpValue(upvalue);
+        }
+
+        public void SetUpValue(int value)
+        {
+            upValue = value;
+        }
+
+
         public void AddUpPoint(int addUpPoint)
         {
             upPoint = upPoint + addUpPoint;
@@ -634,6 +711,7 @@ namespace SoraHareSakura_Game_Api
         public void SetUpPoint(int setUpPoint)
         {
             upPoint = setUpPoint;
+            if (upPoint < 0) upPoint = 0;
             UpMaxValueData();
         }
 
@@ -719,6 +797,30 @@ namespace SoraHareSakura_Game_Api
             equipmentSumValue = 0;
         }
 
+        public void SetInit(float value)
+        {
+            nowValue = value;
+            maxValue = value;
+
+            initValue = value;
+
+            upPoint = 0;
+            upValue = 10;
+
+            effectAddValue = 0;
+            equipmentSumValue = 0;
+        }
+        public void SetInit(float value, float upvalue)
+        {
+            SetInit(value);
+            SetUpValue(upvalue);
+        }
+
+        public void SetUpValue(float value)
+        {
+            upValue = value;
+        }
+
         public void AddUpPoint(int addUpPoint)
         {
             upPoint = upPoint + addUpPoint;
@@ -728,6 +830,7 @@ namespace SoraHareSakura_Game_Api
         public void SetUpPoint(int setUpPoint)
         {
             upPoint = setUpPoint;
+            if(upPoint < 0) upPoint = 0;
             UpMaxValueData();
         }
 

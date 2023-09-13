@@ -80,12 +80,13 @@ namespace SoraHareSakura_GameApi
             actionValue.UpDataEquipmentValue(equipmentSlots.SumAttributeValueFloat("actionValue"));
         }
 
-        //stamina
-        public void UpStamina(int value)
+        //stamina 體力
+        public void UpStamina(int value)//提升體力
         {
             stamina.AddUpPoint(value);
         }
 
+        //顯示體力值
         public (int now,int max) Stamina()
         {
             return (stamina.nowValue, stamina.maxValue);
@@ -97,50 +98,52 @@ namespace SoraHareSakura_GameApi
             return showText;
         }
 
-        //magic point
-        public void UpMagicPoint(int value)
+        //magic point 魔力
+        public void UpMagicPoint(int value)//提升魔力點
         {
             magicPoint.AddUpPoint(value);
         }
 
+        //顯示魔力
         public (int now,int max) MagicPoint()
         {
             return (magicPoint.nowValue, magicPoint.maxValue);
         }
 
         //power
-        public void UpPower(int value)
+        public void UpPower(int value)//提升力量點
         {
             power.AddUpPoint(value);
         }
 
-        public int Power()
+        public int Power()//顯示力量點
         {
             return power.maxValue;
         }
 
         //speed
-        public void UpSpeed(int value)
+        public void UpSpeed(int value)//提升速度點
         {
             speed.AddUpPoint(value);
         }
 
-        public int Speed()
+        public int Speed()//顯示速度點
         {
             return speed.maxValue;
         }
 
         //spiritua power
-        public void UpSpiritualPower(int value)
+        public void UpSpiritualPower(int value)//提升法力點
         {
             spiritualPower.AddUpPoint(value); 
         }
 
-        public int SpiritualPower()
+        public int SpiritualPower()//顯示法力點
         {
             return spiritualPower.maxValue;
         }
 
+        //顯示數值
         //attack
         public int AttackValue()
         {

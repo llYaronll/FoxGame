@@ -84,6 +84,8 @@ namespace SoraHareSakura_GameData_Api
     [System.Serializable]
     public class GameData_GameRoleTable
     {
+        public int id;
+        public string name;
         public List<Character_Attribute> characterTable;
 
         //·s¼W¨¤¦â
