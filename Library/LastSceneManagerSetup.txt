@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/CombatProgramUnitTest.unity
+- path: "Assets/Scenes/\u6885\u9732\u53EF\u7269\u8A9E/\u6885\u9732\u53EF\u7269\u8A9E\u8A2D\u8A08.unity"
   isLoaded: 1
   isActive: 1
   isSubScene: 0

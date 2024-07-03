@@ -566,9 +566,9 @@ namespace SoraHareSakura_Game_Api
         //增加一個等級
         public void AddLevel()
         {
-            level = level + 1;
+            level++;
             upLevelExperiencePoint = EXGrowthFunction();
-            upPoint = upPoint + UpPointGrowthFunction();
+            upPoint += UpPointGrowthFunction();
         }
 
         //增加等級 輸入增加等級值
@@ -704,7 +704,7 @@ namespace SoraHareSakura_Game_Api
 
         public void AddUpPoint(int addUpPoint)
         {
-            upPoint = upPoint + addUpPoint;
+            upPoint += addUpPoint;
             SetUpPoint(upPoint);
         }
 
@@ -752,7 +752,7 @@ namespace SoraHareSakura_Game_Api
 
         public void AddValue(int addValue, bool yesOver)
         {
-            nowValue = nowValue + addValue;
+            nowValue += addValue;
             if (nowValue < 0) nowValue = 0;
             if (yesOver) return;
             if (nowValue > maxValue) nowValue = maxValue;
@@ -761,7 +761,7 @@ namespace SoraHareSakura_Game_Api
         public bool ConsumeValue(int consumeValue)
         {
             if (nowValue < consumeValue) return false;
-            nowValue = nowValue - consumeValue;
+            nowValue -= consumeValue;
             return true;
         }
     }
@@ -823,7 +823,7 @@ namespace SoraHareSakura_Game_Api
 
         public void AddUpPoint(int addUpPoint)
         {
-            upPoint = upPoint + addUpPoint;
+            upPoint += addUpPoint;
             SetUpPoint(upPoint);
         }
 
@@ -869,7 +869,7 @@ namespace SoraHareSakura_Game_Api
 
         public void AddValue(float addValue, bool yesOver)
         {
-            nowValue = nowValue + addValue;
+            nowValue += addValue;
             if (nowValue < 0) nowValue = 0;
             if (yesOver) return;
             if (nowValue > maxValue) nowValue = maxValue;
@@ -878,7 +878,7 @@ namespace SoraHareSakura_Game_Api
         public bool ConsumeValue(float consumeValue)
         {
             if (nowValue < consumeValue) return false;
-            nowValue = nowValue - consumeValue;
+            nowValue -= consumeValue;
             return true;
         }
     }
@@ -1040,7 +1040,7 @@ namespace SoraHareSakura_Game_Api
         //回復行動值條
         public void Restore(float value)
         {
-            actionValue = actionValue + value;
+            actionValue += value;
             if (actionValue > maxActionValue)
             {
                 actionValue = maxActionValue;
@@ -1060,14 +1060,14 @@ namespace SoraHareSakura_Game_Api
         //回復行動值 可以超過上下限
         public void OverRestore(float value)
         {
-            actionValue = actionValue + value;
+            actionValue += value;
         }
 
         //消耗行動值
         public bool ConsumeValue(float consumeValue)
         {
             if (actionValue < consumeValue) return false;
-            actionValue = actionValue - consumeValue;
+            actionValue -= consumeValue;
             return true;
         }
 
@@ -1093,7 +1093,7 @@ namespace SoraHareSakura_Game_Api
         //設定使用物品後行動值增減
         public void AddEffectAddValue(float addValue)
         {
-            effectAddValue = effectAddValue + addValue;
+            effectAddValue += addValue;
         }
 
         //更新最大行動值
